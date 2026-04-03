@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hoja de Vida - Samuel Lascano</title>
+  <style>
+    :root{
+      --bg:#f4f7fb;
+      --card:#ffffff;
+      --primary:#123b6d;
+      --secondary:#1f6fb2;
+      --accent:#16a34a;
+      --text:#1f2937;
+      --muted:#6b7280;
+      --line:#e5e7eb;
+      --soft:#eef4fb;
+      --shadow:0 10px 30px rgba(17,24,39,.10);
+      --radius:20px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background:linear-gradient(135deg,#eef4fb 0%, #f8fbff 55%, #eef7f0 100%);
+      color:var(--text);
+    }
+    .page{
+      max-width:1100px;
+      margin:32px auto;
+      background:var(--card);
+      box-shadow:var(--shadow);
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.7);
+    }
+    .hero{
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      background:linear-gradient(135deg,var(--primary),#0e2f57 60%, var(--secondary));
+      color:#fff;
+    }
+    .sidebar{
+      padding:32px 28px;
+      background:rgba(255,255,255,.06);
+      backdrop-filter: blur(4px);
+    }
+    .mainhead{
+      padding:40px 42px 32px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+    .avatar{
+      width:120px;
+      height:120px;
+      border-radius:50%;
+      background:linear-gradient(135deg,#ffffff,#dbeafe);
+      color:var(--primary);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:42px;
+      font-weight:800;
+      margin-bottom:18px;
+      border:4px solid rgba(255,255,255,.35);
+      box-shadow:0 8px 24px rgba(0,0,0,.18);
+    }
+    h1{
+      margin:0 0 8px;
+      font-size:42px;
+      line-height:1.05;
+      letter-spacing:.2px;
+    }
+    .tagline{
+      font-size:18px;
+      font-weight:600;
+      opacity:.95;
+      margin-bottom:14px;
+    }
+    .summary{
+      font-size:15.5px;
+      line-height:1.7;
+      max-width:700px;
+      color:rgba(255,255,255,.92);
+    }
+    .contact-list, .mini-list{
+      list-style:none;
+      padding:0;
+      margin:14px 0 0;
+    }
+    .contact-list li, .mini-list li{
+      padding:10px 0;
+      border-bottom:1px solid rgba(255,255,255,.14);
+      font-size:14.5px;
+      line-height:1.5;
+    }
+    .label{
+      display:block;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      opacity:.72;
+      margin-bottom:2px;
+    }
+    .sidebar h3{
+      margin:24px 0 8px;
+      font-size:15px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      color:#dbeafe;
+    }
+    .content{
+      display:grid;
+      grid-template-columns: 320px 1fr;
+    }
+    .leftcol{
+      background:#f8fbff;
+      padding:28px;
+      border-right:1px solid var(--line);
+    }
+    .rightcol{
+      padding:30px 34px 40px;
+    }
+    .section{
+      margin-bottom:28px;
+    }
+    .section h2{
+      margin:0 0 14px;
+      font-size:18px;
+      color:var(--primary);
+      position:relative;
+      padding-bottom:10px;
+    }
+    .section h2::after{
+      content:"";
+      position:absolute;
+      left:0; bottom:0;
+      width:64px; height:4px;
+      background:linear-gradient(90deg,var(--secondary),var(--accent));
+      border-radius:999px;
+    }
+    .pill-wrap{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .pill{
+      background:var(--soft);
+      border:1px solid #dbeafe;
+      color:var(--primary);
+      padding:9px 12px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:600;
+    }
+    .item{
+      padding:16px 18px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      margin-bottom:14px;
+      background:#fff;
+      box-shadow:0 4px 14px rgba(15,23,42,.04);
+    }
+    .item h4{
+      margin:0 0 6px;
+      font-size:17px;
+      color:#0f172a;
+    }
+    .meta{
+      font-size:13.5px;
+      color:var(--secondary);
+      font-weight:600;
+      margin-bottom:8px;
+    }
+    .item p{
+      margin:0;
+      font-size:14.5px;
+      line-height:1.7;
+      color:#374151;
+    }
+    .highlight{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      margin-top:8px;
+    }
+    .stat{
+      background:linear-gradient(180deg,#ffffff,#f7fbff);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px 16px;
+      text-align:center;
+    }
+    .stat strong{
+      display:block;
+      font-size:28px;
+      color:var(--primary);
+      margin-bottom:6px;
+    }
+    .stat span{
+      font-size:13px;
+      color:var(--muted);
+    }
+    .footer{
+      text-align:center;
+      padding:16px 20px 28px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .note{
+      background:#f0fdf4;
+      border:1px solid #bbf7d0;
+      color:#166534;
+      padding:14px 16px;
+      border-radius:16px;
+      font-size:14px;
+      line-height:1.6;
+      margin-top:16px;
+    }
+    @media (max-width: 900px){
+      .hero, .content{
+        grid-template-columns:1fr;
+      }
+      .leftcol{
+        border-right:none;
+        border-bottom:1px solid var(--line);
+      }
+      .highlight{
+        grid-template-columns:1fr;
+      }
+      h1{font-size:34px}
+      .mainhead{padding:30px 24px}
+      .sidebar{padding:28px 24px}
+      .rightcol, .leftcol{padding:24px}
+    }
+    @media print{
+      body{background:#fff}
+      .page{box-shadow:none; margin:0; border:none; border-radius:0}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <aside class="sidebar">
+        <div class="avatar">SL</div>
+        <div class="tagline">Docente universitario · Investigador · Ingeniero IEEE</div>
+
+        <h3>Contacto</h3>
+        <ul class="contact-list">
+          <li><span class="label">Ubicación</span>Tulcán, Carchi, Ecuador</li>
+          <li><span class="label">Institución</span>Universidad Politécnica Estatal del Carchi (UPEC)</li>
+          <li><span class="label">Áreas</span>Ingeniería de Software, IA, IHM, Aplicaciones Móviles</li>
+          <li><span class="label">Perfil</span>Docencia, investigación, dirección académica y proyectos tecnológicos</li>
+        </ul>
+
+        <h3>Competencias</h3>
+        <ul class="mini-list">
+          <li>Diseño y desarrollo de software</li>
+          <li>Inteligencia artificial aplicada</li>
+          <li>Ingeniería de software y UX</li>
+          <li>IoT y analítica de datos</li>
+          <li>Investigación científica y publicación</li>
+          <li>Virtualización educativa y ABP</li>
+        </ul>
+      </aside>
+
+      <section class="mainhead">
+        <h1>Samuel Lascano</h1>
+        <div class="tagline">Doctor en Sistemas e Informática · Magíster en Ingeniería de Software</div>
+        <p class="summary">
+          Profesional del área de Computación con experiencia en docencia universitaria, investigación aplicada y dirección de proyectos tecnológicos.
+          Su trayectoria integra ingeniería de software, inteligencia artificial, interacción humano-máquina, analítica de datos y transformación digital educativa.
+          Mantiene una línea activa de investigación en sensores inteligentes, machine learning y sistemas predictivos aplicados al sector agropecuario.
+        </p>
+
+        <div class="highlight">
+          <div class="stat">
+            <strong>4+</strong>
+            <span>Áreas docentes clave</span>
+          </div>
+          <div class="stat">
+            <strong>2</strong>
+            <span>Artículos destacados recientes</span>
+          </div>
+          <div class="stat">
+            <strong>1</strong>
+            <span>Red internacional dirigida</span>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main class="content">
+      <section class="leftcol">
+        <div class="section">
+          <h2>Formación académica</h2>
+          <div class="item">
+            <h4>Doctor en Sistemas e Informática</h4>
+            <div class="meta">Universidad Nacional Mayor de San Marcos (UNMSM)</div>
+            <p>Formación doctoral orientada a investigación avanzada en informática, analítica y modelado aplicado.</p>
+          </div>
+          <div class="item">
+            <h4>Magíster en Ingeniería de Software</h4>
+            <div class="meta">Universidad Técnica del Norte</div>
+            <p>Especialización en procesos, calidad, modelado, arquitectura y desarrollo de soluciones de software.</p>
+          </div>
+          <div class="item">
+            <h4>Ingeniero en Software · Ingeniero en Sistemas e Informática</h4>
+            <div class="meta">Formación de grado</div>
+            <p>Base profesional en análisis, diseño, implementación y gestión de sistemas computacionales.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Habilidades</h2>
+          <div class="pill-wrap">
+            <span class="pill">Python</span>
+            <span class="pill">Machine Learning</span>
+            <span class="pill">TensorFlow / Keras</span>
+            <span class="pill">Scikit-learn</span>
+            <span class="pill">Sistemas IoT</span>
+            <span class="pill">UX / IHM</span>
+            <span class="pill">Selenium</span>
+            <span class="pill">Dart</span>
+            <span class="pill">HTML / CSS</span>
+            <span class="pill">Bizagi</span>
+            <span class="pill">Moodle</span>
+            <span class="pill">Investigación científica</span>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Idiomas y fortalezas</h2>
+          <div class="item">
+            <p><strong>Idioma principal:</strong> Español<br>
+            <strong>Fortalezas:</strong> liderazgo académico, comunicación docente, estructuración metodológica, publicación científica, diseño de recursos educativos y gestión de equipos.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="rightcol">
+        <div class="section">
+          <h2>Perfil profesional</h2>
+          <div class="item">
+            <p>
+              Docente universitario de la carrera de Computación, con experiencia en las asignaturas de Programación, Aplicaciones Móviles,
+              Interacción Hombre-Máquina e Ingeniería de Software. También participa en programas de posgrado vinculados a tecnología,
+              innovación e ingeniería de software. Su trabajo combina formación académica, investigación aplicada y producción científica.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Experiencia y cargos</h2>
+          <div class="item">
+            <h4>Docente universitario</h4>
+            <div class="meta">Universidad Politécnica Estatal del Carchi (UPEC)</div>
+            <p>Docencia en grado y posgrado, diseño de sílabos, actividades prácticas, evaluación, acompañamiento de proyectos y tutoría académica.</p>
+          </div>
+          <div class="item">
+            <h4>Director General de la Red Internacional de Investigación y Observatorio de Tecnologías Emergentes (RIIOTE)</h4>
+            <div class="meta">Gestión académica e investigación</div>
+            <p>Impulso de colaboración científica, articulación de redes, difusión del conocimiento y promoción de tecnologías emergentes.</p>
+          </div>
+          <div class="item">
+            <h4>Ingeniero IEEE · Coordinador de célula UPEC</h4>
+            <div class="meta">Liderazgo técnico y académico</div>
+            <p>Organización de iniciativas tecnológicas, vinculación con comunidad académica y fortalecimiento de competencias profesionales.</p>
+          </div>
+          <div class="item">
+            <h4>Experiencia en sector público</h4>
+            <div class="meta">Administrador de Bases de Datos · Jefe TIC</div>
+            <p>Participación en administración tecnológica, soporte institucional, gestión de infraestructura y operación de servicios informáticos.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Líneas de investigación</h2>
+          <div class="item">
+            <p>
+              Inteligencia artificial aplicada, sensores inteligentes, ingeniería de software, analítica de datos, interacción humano-máquina,
+              sistemas predictivos, aprendizaje automático, virtualización educativa y tecnologías emergentes.
+            </p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Publicaciones y logros destacados</h2>
+          <div class="item">
+            <h4>Artificial Intelligence and Circadian Thresholds for Stress Detection in Dairy Cattle</h4>
+            <div class="meta">MDPI Sensors · 2025</div>
+            <p>Artículo orientado a la detección de estrés en ganado lechero mediante inteligencia artificial, umbrales circadianos y análisis de datos.</p>
+          </div>
+          <div class="item">
+            <h4>Sensores inteligentes y técnicas de machine learning para la detección del estrés en ganado bovino</h4>
+            <div class="meta">Publicación científica · 2025</div>
+            <p>Trabajo enfocado en sensores, variables fisiológicas y modelos de aprendizaje automático aplicados al monitoreo animal.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2>Información adicional</h2>
+          <div class="item">
+            <p>
+              Interés en desarrollo de software con IA, educación superior, investigación científica, diseño de materiales didácticos,
+              innovación académica y vinculación interdisciplinaria.
+            </p>
+          </div>
+          <div class="note">
+            Esta plantilla está en un solo archivo HTML con estilos integrados, para que puedas editarla fácilmente en cualquier editor
+            y personalizar datos como teléfono, correo, enlaces, fotografía, experiencia o publicaciones.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">
+      Hoja de vida en HTML · Diseño editable y responsivo
+    </div>
+  </div>
+</body>
+</html>
